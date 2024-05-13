@@ -82,5 +82,14 @@ func SearchItemsHandler(c *gin.Context) {
 	}
 
 	fmt.Println("len of items:", len(items))
+	items = AppendUrlTag(items)
 	c.JSON(http.StatusOK, SearchItemsRespone{items})
+}
+
+func AppendUrlTag(items []model.GpuItem) []model.GpuItem {
+	for i := 0; i < len(items); i++ {
+		itemPoiter := &(items[i])
+		itemPoiter.URL = fmt.Sprintf("%s&tag=%s", itemPoiter.URL, "217308-20")
+	}
+	return items
 }
